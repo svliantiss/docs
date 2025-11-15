@@ -6,7 +6,7 @@ description: "Move from your existing AI provider to Emby in minutes — no lock
 
 ## Migrate to Emby in Minutes
 
-Switching from platforms like OpenAI, Anthropic, Gemini, OpenRouter, Together, or your own OpenAI-compatible backend?\
+Switching from platforms like OpenAI, Anthropic, Gemini, OpenRouter, Together, or your own OpenAI-compatible backend?  
 Emby makes migration simple **no code rewrites**, **no lock-in**, and **instant compatibility** with your existing tools like Cursor, Kilo Code, Claude Code, Warp, and OpenWebUI.
 
 Emby is fully **OpenAI & Anthropic compatible**, so most users only need to **swap their API key and base URL**.
@@ -20,14 +20,14 @@ OPENAI_API_KEY=<your-emby-key>
 OPENAI_API_BASE=https://api.emby.dev/v1
 ```
 
-You're done.\
+You're done.  
 Your tools continue to work but now with predictable pricing, EU hosting, and better model performance.
 
 ---
 
 ## Tool-Specific Migration Guides
 
-Below are the most common tools developers switch to Emby from.\
+Below are the most common tools developers switch to Emby from.  
 Each one stays compatible using the same OpenAI-style configuration.
 
 ---
@@ -36,22 +36,16 @@ Each one stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate Cursor to Emby" icon="cursor">
-    1. Open <b>
-       Settings → Providers</b>
-    2. Select <b>
-       OpenAI Compatible</b>
-    3. Enter:\
-       \
-        <code>
-       Base URL: https://api.emby.dev/v1</code>
-
-       \
-        <code>
-       API Key: \<your-emby-key\></code>
-
-       \
-       \
-        Cursor now uses Emby with no additional changes.
+    1. Open <b>Settings → Providers</b>
+    2. Select <b>OpenAI Compatible</b>
+    3. Enter:  
+       
+       <code>Base URL: https://api.emby.dev/v1</code>
+       
+       <code>API Key: \<your-emby-key\></code>
+       
+       
+       Cursor now uses Emby with no additional changes.
   </Card>
 </CardGroup>
 
@@ -62,22 +56,16 @@ Each one stays compatible using the same OpenAI-style configuration.
 <CardGroup cols={1}>
   <Card title="How to Migrate Kilo Code" icon="bolt">
     1. Install Kilo Code from VSCode Marketplace
-    2. Open Kilo Settings and configure:\
-       \
-        <code>
-       API Provider: OpenAI Compatible</code>
-
-       \
-        <code>
-       Base URL: https://api.emby.dev/v1</code>
-
-       \
-        <code>
-       API Key: \<your-emby-key\></code>
-
-       \
-       \
-        Your coding assistant now runs on fast, stable EU-hosted Emby models.
+    2. Open Kilo Settings and configure:  
+       
+       <code>API Provider: OpenAI Compatible</code>
+       
+       <code>Base URL: https://api.emby.dev/v1</code>
+       
+       <code>API Key: \<your-emby-key\></code>
+       
+       
+       Your coding assistant now runs on fast, stable EU-hosted Emby models.
   </Card>
 </CardGroup>
 
@@ -88,20 +76,15 @@ Each one stays compatible using the same OpenAI-style configuration.
 <CardGroup cols={1}>
   <Card title="How to Migrate OpenWebUI" icon="browser">
     1. Install & open OpenWebUI
-    2. Go to <b>
-       Admin Panel → Settings → Connections</b>
-
-       \
-       \
-        <code>
-       OPENAI_API_BASE=https://api.emby.dev/v1</code>
-
-       \
-        <code>
-       OPENAI_API_KEY=\<your-emby-key\></code>
-    3. Pick any Emby model from the model list.\
-       \
-        You're fully migrated.
+    2. Go to <b>Admin Panel → Settings → Connections</b>
+       
+       
+       <code>OPENAI_API_BASE=https://api.emby.dev/v1</code>
+       
+       <code>OPENAI_API_KEY=\<your-emby-key\></code>
+    3. Pick any Emby model from the model list.  
+       
+       You're fully migrated.
   </Card>
 </CardGroup>
 
@@ -112,21 +95,16 @@ Each one stays compatible using the same OpenAI-style configuration.
 <CardGroup cols={1}>
   <Card title="How to Migrate Aider" icon="terminal">
     1. Install Aider
-    2. Set environment variables:\
-       \
-        <code>
-       OPENAI_API_BASE=https://api.emby.dev/v1</code>
-
-       \
-        <code>
-       OPENAI_API_KEY=\<your-emby-key\></code>
-    3. Choose a model:\
-        <code>
-       aider --model emby/deepseek-v3</code>
-
-       \
-       \
-        Aider now uses Emby with zero additional setup.
+    2. Set environment variables:  
+       
+       <code>OPENAI_API_BASE=https://api.emby.dev/v1</code>
+       
+       <code>OPENAI_API_KEY=\<your-emby-key\></code>
+    3. Choose a model:  
+       <code>aider --model emby/deepseek-v3</code>
+       
+       
+       Aider now uses Emby with zero additional setup.
   </Card>
 </CardGroup>
 
@@ -136,27 +114,19 @@ Each one stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate n8n → Emby" icon="workflow">
-    1. Go to <b>
-       Settings → Credentials</b>
-    2. Add <b>
-       OpenAI Credentials</b>
-
-       \
-       \
-        <code>
-       API Key: \<your-emby-key\></code>
-
-       \
-        <code>
-       Base URL: https://api.emby.dev/v1</code>
-
-       \
-        <code>
-       Organization: (leave empty)</code>
+    1. Go to <b>Settings → Credentials</b>
+    2. Add <b>OpenAI Credentials</b>
+       
+       
+       <code>API Key: \<your-emby-key\></code>
+       
+       <code>Base URL: https://api.emby.dev/v1</code>
+       
+       <code>Organization: (leave empty)</code>
     3. In your workflow, add an AI Agent → Chat Model
-    4. Select any Emby model\
-       \
-        Run the workflow — you're good to go.
+    4. Select any Emby model  
+       
+       Run the workflow — you're good to go.
   </Card>
 </CardGroup>
 
@@ -183,11 +153,11 @@ Each one stays compatible using the same OpenAI-style configuration.
 
 ## Need Help Migrating?
 
-We’re here to make switching simple.
+We're here to make switching simple.
 
 <CardGroup cols={2}>
   <Card title="Live Chat Support" icon="message">
-    Ask us anything in the support widget and we’ll help you migrate instantly.
+    Ask us anything in the support widget and we'll help you migrate instantly.
   </Card>
   <Card title="Join Our Discord" icon="discord">
     Get migration help from our team & community.
