@@ -1,0 +1,202 @@
+---
+title: "Anthropic API Compatibility"
+sidebarTitle: "Anthropic Compatibility"
+description: "Use Emby’s Anthropic-compatible /v1/messages endpoint to run any Emby model through Claude-style APIs — fully compatible with Claude Code and Anthropic SDKs."
+---
+
+# Anthropic-Compatible API (Claude-Compatible)
+
+Emby provides a native **Anthropic-compatible Messages API** at:
+
+```
+POST https://api.emby.dev/v1/messages
+```
+
+This allows you to use **any Emby model** — Kimi, DeepSeek, Qwen, GLM, Llama, and more — through the familiar **Claude-style request format**.
+
+Perfect for:
+
+- **Claude Code CLI**
+- **Tools expecting Anthropic’s `/v1/messages` schema**
+- **Apps that cannot easily switch from Anthropic → OpenAI format**
+- **Teams wanting better performance + predictable costs + EU hosting**
+
+---
+
+# Why Use Emby’s Anthropic Endpoint?
+
+<CardGroup cols={2}>
+  <Card title="Drop-In Claude Compatibility" icon="code">
+    Keep your existing Claude Code, scripts, and integrations — just point them at Emby.
+  </Card>
+  <Card title="Use Any Model" icon="model">
+    Run Kimi, DeepSeek, Qwen, GLM, and more through the Anthropic API schema.
+  </Card>
+  <Card title="EU Hosting & Privacy" icon="shield">
+    All Emby traffic stays inside the EU via bit.nl and Nebius Amsterdam.
+  </Card>
+  <Card title="Predictable Costs" icon="tag">
+    No more unpredictable Anthropic token billing — just simple per-developer plans.
+  </Card>
+</CardGroup>
+
+---
+
+# Quick Setup (Claude Code)
+
+Claude Code works instantly with Emby using three environment variables.
+
+```bash
+export ANTHROPIC_BASE_URL="https://api.emby.dev/v1"
+export ANTHROPIC_AUTH_TOKEN="<your-emby-key>"
+# Optional: choose a model — otherwise Emby defaults to DeepSeek
+export ANTHROPIC_MODEL="deepseek-v3"
+```
+
+Run Claude:
+
+```bash
+claude
+```
+
+Your Claude Code CLI now uses **Emby models** with **Claude’s API format**.
+
+---
+
+# Choosing a Model
+
+Use any Emby-hosted or routed model with Claude Code:
+
+```bash
+# Fastest / most popular
+export ANTHROPIC_MODEL=deepseek-v3
+
+# Best reasoning (Open Source)
+export ANTHROPIC_MODEL=kimi-k2-thinking
+
+# Qwen Coder (for dev workflows)
+export ANTHROPIC_MODEL=qwen2.5-coder-32b
+
+# Ultra-cheap high-speed
+export ANTHROPIC_MODEL=glm4-9b
+
+# Claude (when using BYOK routing)
+export ANTHROPIC_MODEL=anthropic/claude-3.5-sonnet
+```
+
+Any model Emby exposes is compatible.
+
+---
+
+# Environment Variables Explained
+
+### `ANTHROPIC_MODEL`
+Primary model your Claude-compatible tool uses.
+
+```
+export ANTHROPIC_MODEL=kimi-k2-thinking
+```
+
+### `ANTHROPIC_SMALL_FAST_MODEL`
+Some Anthropic tools require a "fast fallback model."
+
+```
+export ANTHROPIC_SMALL_FAST_MODEL=glm4-9b
+```
+
+### Full Example
+
+```bash
+export ANTHROPIC_BASE_URL="https://api.emby.dev/v1"
+export ANTHROPIC_AUTH_TOKEN="<your-emby-key>"
+export ANTHROPIC_MODEL="deepseek-v3"
+export ANTHROPIC_SMALL_FAST_MODEL="glm4-9b"
+```
+
+---
+
+# Manual API Request (Anthropic Style)
+
+```bash
+curl -X POST "https://api.emby.dev/v1/messages" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek-v3",
+    "messages": [
+      {"role": "user", "content": "Explain Rust lifetimes simply."}
+    ],
+    "max_tokens": 150
+  }'
+```
+
+---
+
+# Response Format (Claude-Compatible)
+
+Emby returns messages in **Anthropic’s native JSON structure**:
+
+```json
+{
+  "id": "msg_123",
+  "type": "message",
+  "role": "assistant",
+  "model": "deepseek-v3",
+  "content": [
+    {
+      "type": "text",
+      "text": "Rust lifetimes ensure references remain valid…"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 18,
+    "output_tokens": 42
+  }
+}
+```
+
+You can swap models without changing any client code.
+
+---
+
+# Advanced Usage
+
+## Switching Models Quickly
+
+```bash
+export ANTHROPIC_MODEL=kimi-k2-thinking    # complex reasoning
+export ANTHROPIC_MODEL=glm4-9b             # cheap & fast
+export ANTHROPIC_MODEL=qwen2.5-coder-32b   # coding workflows
+export ANTHROPIC_MODEL=deepseek-v3         # balanced default
+```
+
+## Persistent Configuration
+
+Add to `.bashrc` or `.zshrc`:
+
+```bash
+echo 'export ANTHROPIC_BASE_URL="https://api.emby.dev/v1"' >> ~/.zshrc
+echo 'export ANTHROPIC_AUTH_TOKEN="<your-emby-key>"' >> ~/.zshrc
+echo 'export ANTHROPIC_MODEL="deepseek-v3"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+---
+
+# Need Help?
+
+We help teams migrate their Claude workflows in minutes.
+
+<CardGroup cols={2}>
+  <Card title="WhatsApp Support" icon="phone">
+    Chat with us instantly:<br/>
+    <a href="https://wa.absolum.nl" target="_blank">https://wa.absolum.nl</a>
+  </Card>
+  <Card title="Book a Call" icon="calendar">
+    For enterprise routing, BYOK, or custom GPU servers:<br/>
+    <a href="https://cal.com/absolum/30min" target="_blank">https://cal.com/absolum/30min</a>
+  </Card>
+</CardGroup>
+
+Your Claude-based workflows can be running on Emby models **in under 5 minutes**.
