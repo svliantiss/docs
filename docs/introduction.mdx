@@ -12,21 +12,21 @@ mode: "wide"
 
 ## What is Emby Dev?
 
-Emby.dev gives developer teams **easy and secure access to the best open source coding models** like Kimi, DeepSeek, GLM and Qwen without surprise token bills, proprietary lock-in, or managing GPUs, App compatibility, and Compliance.\
-\
-Use your existing tools (Cursor, Kilo, Warp, IDE plugins) with\
-**drop-in OpenAI & Claude compatible API keys**, that can route to any of our EU hosted and compliant models.
+Emby.dev gives developer teams **easy and secure access to the best open-source coding models** like Kimi, DeepSeek, GLM and Qwen—without surprise token bills, proprietary lock-in, or dealing with GPU hardware, compatibility issues, and compliance.  
+Use your existing tools (Cursor, Kilo, Warp, IDE plugins) with  
+**drop-in OpenAI & Claude-compatible API keys**, routing to our EU-hosted models with zero setup.
 
-Checkout our handy guides for integrating with your favorite tools like Kilo Code, Claude Code and more Here.
+Checkout our handy guides for integrating with tools like Kilo Code, Claude Code and more here.
 
 <CardGroup cols={2}>
-  <Card title="Unified Model Routing">
-    Use our open source models with our unlimited subscription, and keep using models from OpenAI (Azure), Anthropic (AWS), Gemini (Vertex) \
-    \* Routing fee (5%) or BYOK (€50/m)
+  <Card title="Unified Model Routing" icon="shuffle">
+    Use our open-source models with our unlimited subscription, and keep using 
+    models from OpenAI (Azure), Anthropic (AWS), Gemini (Vertex).  
+    <br/>*Routing fee (5%) or BYOK (€50/m)*
   </Card>
-  <Card title="Merchant of Record" icon="globe">
-    No token billing, no surprise overages, no changing limits just a simple
 
+  <Card title="Predictable Pricing" icon="credit-card">
+    No token billing, no surprise overages, no shifting limits—just a simple, 
     flat monthly or yearly price per developer.
   </Card>
 </CardGroup>
@@ -34,345 +34,283 @@ Checkout our handy guides for integrating with your favorite tools like Kilo Cod
 ## Problems We Solve
 
 <AccordionGroup>
+
   <Accordion title="Unpredictable Token Costs" icon="triangle-exclamation">
-    **⭕ The Problem:** Using code editors like Cursor, Kilo code, Claude Code and Warp are expensive running up in to the €100 per day easily and costs scale unpredictably with increased team members and reliance as AI coding becomes the standard in any software developement team.\
-    \
-    Providers like OpenAI, Anthropic and Google overcharge you rediculously on your inference whilst training on your data, and not providing full compliance for EU dev teams.
+    **⭕ The Problem:**  
+    Using AI code editors like Cursor, Kilo Code, Claude Code and Warp becomes extremely expensive—easily reaching **€100/day**—and scales unpredictably as AI becomes central to your daily workflow.  
+    Providers like OpenAI, Anthropic and Google aggressively overcharge for inference, train on your data, and lack proper EU compliance.
 
-    \*\*💡 Emby’s Solution: \*\*    Predictable subscription pricing per developer. Unlimited Emby-token usage with built-in fair usage limits based on your plan and model-based allocation right in Europe 🇪🇺 on ISO27001 and NEN7510 Certified infrastructure of **bit.nl** and fallback on **nebius.com** (Amsterdam, NL 🇳🇱)
+    **💡 Emby’s Solution:**  
+    Predictable subscription pricing per developer.  
+    Unlimited Emby-token usage with fair usage limits depending on your plan.  
+    Fully hosted in Europe 🇪🇺 on ISO27001 & NEN7510 certified **bit.nl**  
+    with fallback at **Nebius Amsterdam 🇳🇱**.
   </Accordion>
-  <Accordion title="Too many API keys" icon="gears">
-    **⭕  The Problem**: New model releases, changing APIs, per-provider limits, and compliance checks make it difficult to maintain a consistent setup for your team.
 
-    **💡 Emby’s Solution**: A unified API that lets you route to trusted providers like Azure, AWS. Bedrock, Nebius, Vertex, or DeepInfra and more.\
-    \
-    \* Use our routing (5%) or bring your own keys (€50/month).
+  <Accordion title="Too many API keys" icon="key">
+    **⭕ The Problem:**  
+    Constantly updating API keys for different providers, new model releases, changing limits, and compliance checks create chaos in your team setup.
+
+    **💡 Emby’s Solution:**  
+    A unified API that routes to trusted providers like Azure (OpenAI), AWS Bedrock (Anthropic), Nebius, Vertex, DeepInfra and more.  
+    <br/>*Use our routing (5%) or bring your own keys (€50/month).*
   </Accordion>
+
   <Accordion title="Slow Inference & Compatibility Issues" icon="zap">
-    ⭕ **The Problem**: AI coding tools work best when responses feel instant. In reality, performance fluctuates sometimes fast, sometimes slow depending on provider load or region. New model releases and changing APIs can also break your workflow, requiring constant adjustments.
+    **⭕ The Problem:**  
+    AI coding tools break easily when providers throttle, change APIs, move regions, or release new model versions.  
+    Latency fluctuates; compatibility breaks; nothing feels consistently fast.
 
-    💡 **Emby’s Solution**: We host key models directly on fast EU servers, providing **consistent low-latency performance**. Our API stays compatible with major coding tools (Cursor, Kilo Code, Claude Code and more), even when providers change their systems.  
-
-        Integrate Emby once, and your setup remains stable.
+    **💡 Emby’s Solution:**  
+    We host key models directly in the EU for **consistently fast, low-latency performance**.  
+    Our API remains compatible with tools like Cursor, Kilo Code, Claude Code—even when those tools shift their integrations.  
+    Integrate Emby once, and your setup stays stable.
   </Accordion>
+
   <Accordion title="Vendor Lock-In & Data Privacy" icon="lock">
-    ⭕ **The Problem**: Tools like Cursor & Warp constantly change their pricing, limits, and policies. What starts as “\$20/month unlimited” quietly becomes less and less more rate-limits, more timeouts, and more restrictions as your team grows.
+    **⭕ The Problem:**  
+    Tools like Cursor & Warp frequently change pricing, rate limits, and policies.  
+    "€20/month unlimited" becomes stricter every few months—more timeouts, more throttling, less value.
 
-    Most of these editors route your requests through OpenAI, Anthropic or OpenRouter, which means:
+    Most of these editors route requests through OpenAI, Anthropic or OpenRouter, meaning:
+    - Unpredictable token costs  
+    - No real EU compliance  
+    - Code & prompts leaving the EU  
+    - Paid premium models that get brutally expensive at team scale  
 
-    - Unpredictable token costs
-    - No real EU compliance
-    - Your code and prompts leaving the EU
-    - Premium model pricing that becomes brutally expensive at scale
+    Trying to avoid this by hosting your own models forces you into GPU maintenance, scaling, networking, patches—things your team does **not** want to be responsible for.
 
-    And if you try avoiding those costs by running your own models, you suddenly have to deal with GPUs, upgrades, scaling, networking, patches… all the things your team**does not ** want.
-
-    💡 **Emby’s Solution:** Predictable model access with a simple subscription per developer. Fully EU-hosted. No price shifts. No lock-in. No surprise token bills. And no managing GPUs or complicated infrastructure  we handle the heavy lifting while your team just uses the models they want.
-
-    ---
+    **💡 Emby’s Solution:**  
+    Predictable model access via simple per-developer pricing.  
+    Fully EU-hosted. No lock-in. No surprise token bills.  
+    Zero GPU management—your team just uses the models they want.
   </Accordion>
+
 </AccordionGroup>
+
+---
 
 ## How Emby Works
 
-### Flexible Product Management
+### Unified API Access
 
 <CardGroup cols={3}>
-  <Card title="One-time Purchases" icon="cart-shopping">
-    Sell digital products, courses, templates, or software licenses with instant delivery
+  <Card title="Single API" icon="code">
+    One API compatible with both OpenAI and Anthropic SDKs.
   </Card>
-  <Card title="Subscriptions" icon="arrows-rotate">
-    Recurring billing with automatic renewals and dunning management
+  <Card title="Flexible Routing" icon="shuffle">
+    Use Emby-hosted models or route to Azure, AWS, Vertex, Nebius and more.
   </Card>
-  <Card title="Flexible Pricing" icon="hand-holding-dollar">
-    Fixed price, pay-what-you-want, or free products with optional minimums
+  <Card title="Enterprise Controls" icon="shield-halved">
+    Team management, usage limits, compliance and secure access.
   </Card>
 </CardGroup>
 
-### Powerful Checkout Experience
+---
 
-<img
-  className="block dark:hidden"
-  src="/assets/introduction/checkout.light.png"
-/>
+### Fast & Reliable EU Hosting
 
-<img
-  className="hidden dark:block"
-  src="/assets/introduction/checkout.dark.png"
-/>
+<img height="200" src="/assets/welcome.png" />
+
+<img height="200" src="/assets/welcome.png" />
 
 <CardGroup cols={3}>
-  <Card title="Checkout Links" icon="link" href="/features/checkout/links">
-    No-code solution for quick product sales. Create and share instantly.
+  <Card title="EU Hosting" icon="server">
+    Powered by bit.nl & Nebius Amsterdam with strict EU data handling.
   </Card>
-  <Card title="Embedded Checkout" icon="browser" href="/features/checkout/embed">
-    Integrate seamlessly into your website with customizable branding.
+  <Card title="Autoscaling Performance" icon="gauge-high">
+    Models automatically scale for consistent low-latency inference.
   </Card>
-  <Card title="Checkout API" icon="code" href="/api-reference">
-    Programmatically create dynamic checkout sessions for custom flows.
+  <Card title="Daily Model Updates" icon="bolt">
+    Latest open-source models added and upgraded automatically.
   </Card>
 </CardGroup>
 
-### Automated Benefits (Entitlements)
+---
 
-**Set it and forget it**: Configure once, and customers get instant access to their benefits automatically. No manual work required.
+### Developer Tool Compatibility
+
+**Works with your existing setup** — no config rewrites, no lock-in.
 
 <CardGroup cols={2}>
-  <Card title="License Keys" icon="key" href="/features/benefits/license-keys">
-    Generate and deliver software licenses automatically with custom formats
+  <Card title="Cursor" icon="terminal">
+    Drop in your Emby API key. Everything works instantly.
   </Card>
-  <Card title="File Downloads" icon="download" href="/features/benefits/file-downloads">
-    Secure delivery of digital assets up to 10GB with download tracking
+  <Card title="Kilo Code" icon="code-branch">
+    Replace your OpenAI key with Emby to unlock unlimited models.
   </Card>
-  <Card title="GitHub Access" icon="github" href="/features/benefits/github-access">
-    Auto-invite customers to private repositories and manage permissions
+  <Card title="Claude Code" icon="sparkles">
+    Fully compatible with Claude-style message formats & tools.
   </Card>
-  <Card title="Discord Access" icon="discord" href="/features/benefits/discord-access">
-    Automatic role assignment and server invites for community access
+  <Card title="Warp & Terminals" icon="keyboard">
+    Use standard OpenAI-style environment variables for simple integration.
   </Card>
 </CardGroup>
 
-### Global Merchant of Record
+---
 
-- **Worldwide Tax Compliance** - We handle VAT, GST, and sales tax in all jurisdictions
-- **EU VAT Handling** - Proper B2B reverse charge and B2C tax collection
-- **Automatic Tax Calculation** - Real-time tax rates for every transaction
+### Team & Access Management
+
+<CardGroup cols={2}>
+  <Card title="Per-Developer Keys" icon="id-card">
+    Rotate, restrict, and track usage across your engineering team.
+  </Card>
+  <Card title="Secure Access" icon="lock">
+    Private endpoints, IP restrictions, and EU data sovereignty.
+  </Card>
+  <Card title="Detailed Logs" icon="file-lines">
+    Transparent API logs without token-based billing noise.
+  </Card>
+  <Card title="Zero Maintenance" icon="wrench">
+    No GPU hardware, no patches, no DevOps overhead—ever.
+  </Card>
+</CardGroup>
+
+---
 
 ## Quick Start Guide
 
 <Steps>
   <Step title="Create Your Account">
-    [Sign up for Polar](https://polar.sh/signup) using GitHub, Google, or email. Create an organization to manage your products and customers.
+    Sign up and create your organization.
 
-    <img
-      className="block dark:hidden"
-      src="/assets/create-org.light.png"
-    />
-
-    <img
-      className="hidden dark:block"
-      src="/assets/create-org.dark.png"
-    />
+    <img height="200" src="/assets/welcome.png" />
+    <img height="200" src="/assets/welcome.png" />
   </Step>
-  <Step title="Create Your First Product">
-    Set up a digital product in minutes:
 
-    - Choose between one-time purchase or subscription
-    - Set your pricing (fixed, pay-what-you-want, or free)
-    - Configure automated benefits for instant delivery
-
-    Learn more about [Products →](/features/products)
+  <Step title="Add Developers">
+    Invite teammates and generate per-user API keys.
   </Step>
-  <Step title="Choose Your Integration">
-    Pick the approach that fits your needs:
+
+  <Step title="Integrate With Your Tools">
+    Drop your key into Cursor, Kilo, Warp, VS Code or JetBrains.
 
     <Tabs>
-      <Tab title="No-Code (Fastest)">
-        Perfect for getting started quickly:
-
-        - Create [Checkout Links](/features/checkout/links) from your dashboard
-        - Share via email, social media, or embed in websites
-        - Start accepting payments immediately
+      <Tab title="Cursor">
+        Add your Emby key under **Settings → Providers**.
       </Tab>
-      <Tab title="Embedded">
-        Integrate into your existing website:
-
-        - Add our [Embedded Checkout](/features/checkout/embed) component
-        - Maintain your site's look and feel
-        - Customers never leave your domain
+      <Tab title="Kilo">
+        Replace your OpenAI key with your Emby key. Done.
       </Tab>
-      <Tab title="Full API (Maximum Control)">
-        Maximum flexibility for custom workflows:
-
-        - Use our [SDKs](/integrate/sdk/typescript) for any language
-        - Build custom checkout flows and experiences
-        - Integrate with your existing tech stack
+      <Tab title="Claude Code">
+        Works immediately with Claude-style messages.
+      </Tab>
+      <Tab title="Warp">
+        Configure `OPENAI_API_KEY=<emby-key>` and start coding.
       </Tab>
     </Tabs>
   </Step>
-  <Step title="Set Up Webhooks">
-    Stay synchronized with customer events:
 
-    - Configure webhook endpoints in your dashboard
-    - React to purchases, subscription changes, and customer events
-    - Keep your database in sync automatically
-
-    Read the [Webhooks guide →](/integrate/webhooks/endpoints)
+  <Step title="Optional: Routing">
+    Enable Azure, Anthropic, Vertex, Nebius or DeepInfra.  
+    Use our routing (5%) or BYOK (€50/m).
   </Step>
 </Steps>
+
+---
 
 ## Integration Options
 
 ### Framework Adapters (Recommended)
 
 <CardGroup cols={2}>
-  <Card title="Next.js" icon="react" href="/integrate/sdk/adapters/nextjs">
-    React-based full-stack framework with App Router support
-  </Card>
-  <Card title="BetterAuth" icon="react" href="/integrate/sdk/adapters/better-auth">
-    Payments and billing empowered by authentication & authorization
-  </Card>
-  <Card title="Laravel" icon="php" href="/integrate/sdk/adapters/laravel">
-    PHP web application framework with Eloquent ORM integration
-  </Card>
-  <Card title="Deno" icon="node-js" href="/integrate/sdk/adapters/deno">
-    A modern runtime for TypeScript
-  </Card>
+  <Card title="Next.js" icon="react" href="/integrate/sdk/adapters/nextjs" />
+  <Card title="BetterAuth" icon="react" href="/integrate/sdk/adapters/better-auth" />
+  <Card title="Laravel" icon="php" href="/integrate/sdk/adapters/laravel" />
+  <Card title="Deno" icon="node-js" href="/integrate/sdk/adapters/deno" />
 </CardGroup>
 
 <Expandable title="All 12 supported frameworks">
   <CardGroup cols={4}>
-    <Card title="Nuxt" href="/integrate/sdk/adapters/nuxt">
-      Vue.js framework
-    </Card>
-    <Card title="Remix" href="/integrate/sdk/adapters/remix">
-      React framework
-    </Card>
-    <Card title="Fastify" href="/integrate/sdk/adapters/fastify">
-      Fast Node.js
-    </Card>
-    <Card title="Hono" href="/integrate/sdk/adapters/hono">
-      Cloudflare Workers
-    </Card>
-    <Card title="Deno" href="/integrate/sdk/adapters/deno">
-      Modern runtime
-    </Card>
-    <Card title="Tanstack Start" href="/integrate/sdk/adapters/tanstack-start">
-      Full-stack React
-    </Card>
-    <Card title="Elysia" href="/integrate/sdk/adapters/elysia">
-      Bun framework
-    </Card>
-    <Card title="Astro" href="/integrate/sdk/adapters/astro">
-      Static site generator
-    </Card>
-    <Card title="Express" icon="node-js" href="/integrate/sdk/adapters/express">
-      Flexible Node.js framework
-    </Card>
-    <Card title="SvelteKit" icon="js" href="/integrate/sdk/adapters/sveltekit">
-      Full-stack framework
-    </Card>
+    <Card title="Nuxt" href="/integrate/sdk/adapters/nuxt" />
+    <Card title="Remix" href="/integrate/sdk/adapters/remix" />
+    <Card title="Fastify" href="/integrate/sdk/adapters/fastify" />
+    <Card title="Hono" href="/integrate/sdk/adapters/hono" />
+    <Card title="Tanstack Start" href="/integrate/sdk/adapters/tanstack-start" />
+    <Card title="Elysia" href="/integrate/sdk/adapters/elysia" />
+    <Card title="Astro" href="/integrate/sdk/adapters/astro" />
+    <Card title="Express" icon="node-js" href="/integrate/sdk/adapters/express" />
+    <Card title="SvelteKit" icon="js" href="/integrate/sdk/adapters/sveltekit" />
   </CardGroup>
-  ### 
 </Expandable>
 
-<CardGroup cols={4}>
-  
-</CardGroup>
+---
 
-## Why Choose Polar?
+## Why Choose Emby (instead of Polar content)
 
 <Tabs>
-  <Tab title="Individual Developers">
+  <Tab title="Developers">
     <CardGroup cols={2}>
-      <Card title="Ship Faster" icon="rocket">
-        Focus on your product, not billing infrastructure. Get to market weeks faster.
+      <Card title="Fast Responses" icon="bolt">
+        Low-latency model performance for smooth coding.
       </Card>
-      <Card title="Global Reach" icon="globe">
-        Sell worldwide without worrying about tax compliance or regional restrictions.
+      <Card title="Reliable Pricing" icon="wallet">
+        No token billing. No runaway costs.
       </Card>
-      <Card title="Automated Delivery" icon="box">
-        License keys and downloads handled automatically. No manual work required.
+      <Card title="Tool Compatibility" icon="plug">
+        Works with your existing editors & tools.
       </Card>
-      <Card title="Lower Costs" icon="piggy-bank">
-        20% cheaper than competitors with transparent, pay-as-you-earn pricing.
+      <Card title="Open-Source Models" icon="code-branch">
+        Access top OSS models without managing GPUs.
       </Card>
     </CardGroup>
   </Tab>
+
   <Tab title="Small Teams">
     <CardGroup cols={2}>
-      <Card title="No Engineering Overhead" icon="wrench">
-        Complete billing solution without months of custom development work.
-      </Card>
-      <Card title="Scalable Pricing" icon="chart-line">
-        Pay only when you earn, no monthly minimums or setup fees.
-      </Card>
-      <Card title="Team Collaboration" icon="users">
-        Multiple team members can manage products, customers, and analytics.
-      </Card>
-      <Card title="Professional Checkout" icon="credit-card">
-        Branded experience that builds customer trust and increases conversions.
-      </Card>
+      <Card title="Simple Setup" icon="wrench" />
+      <Card title="Predictable Costs" icon="chart-line" />
+      <Card title="Secure Hosting" icon="shield" />
+      <Card title="Flexible Routing" icon="shuffle" />
     </CardGroup>
   </Tab>
-  <Tab title="Growing Businesses">
+
+  <Tab title="Growing Companies">
     <CardGroup cols={2}>
-      <Card title="Enterprise Features" icon="building">
-        Advanced analytics, custom fields, bulk operations, and priority support.
-      </Card>
-      <Card title="API Flexibility" icon="code">
-        Full programmatic control over products, customers, orders, and subscriptions.
-      </Card>
-      <Card title="Webhook Reliability" icon="link">
-        Reliable real-time synchronization with your systems and database.
-      </Card>
+      <Card title="Scalable Infrastructure" icon="server" />
+      <Card title="Enterprise Controls" icon="building-shield" />
+      <Card title="High Availability" icon="cloud" />
+      <Card title="Long-Term Stability" icon="clock" />
     </CardGroup>
   </Tab>
 </Tabs>
 
+---
+
 ## Transparent Pricing
 
 <CardGroup cols={2}>
-  <Card title="4% + 40¢" icon="percent">
-    **Per successful transaction**
-
-    Simple, transparent pricing with no surprises
+  <Card title="Flat per Developer" icon="user">
+    One simple price per seat.  
+    No token billing. No hidden fees.
   </Card>
-  <Card title="$0" icon="dollar-sign">
-    **Monthly fees or setup costs**
-
-    Pay only when you earn, no fixed costs
+  <Card title="Optional Routing" icon="shuffle">
+    5% routing or €50/m Bring-Your-Own-Keys.
   </Card>
 </CardGroup>
 
 <Info>
-  **Additional fees may apply**: Some transactions may incur additional fees (international cards, subscriptions). Payout fees are charged by payment providers. See our [detailed fees page](/merchant-of-record/fees) for complete information.
+  Emby is built for predictable team usage, with optional routing to external providers when you need premium models.
 </Info>
 
-## Open Source & Community
-
-Polar is built in the open with full transparency and a growing community of contributors.
-
-<CardGroup cols={2}>
-  <Card title="Open Source Codebase" icon="github" href="https://github.com/polarsource/polar">
-    Apache 2.0 license with 36+ contributors and growing
-  </Card>
-  <Card title="Public Development" icon="users" href="https://github.com/polarsource/polar/issues">
-    Feature requests, roadmap, and issues - all developed in public
-  </Card>
-  <Card title="Transparent Pricing" icon="eye">
-    No hidden fees or surprise charges. What you see is what you pay.
-  </Card>
-  <Card title="Community Support" icon="discord" href="https://discord.gg/Pnhfz3UThd">
-    Join our Discord for help, feedback, and feature discussions
-  </Card>
-</CardGroup>
-
-<Warning>
-  While self-hosting is technically possible, we recommend using our hosted service to get the full Merchant of Record benefits including global tax compliance.
-</Warning>
+---
 
 ## Ready to Start?
 
 <CardGroup cols={2}>
-  <Card title="Create Account" icon="user-plus" href="https://polar.sh/signup">
-    **Free signup, no credit card required**
-
-    Get started in under 2 minutes
+  <Card title="Create Account" icon="user-plus" href="https://emby.dev/signup">
+    Free trial — no credit card required.
   </Card>
-  <Card title="Read the Guides" icon="book" href="/guides/nextjs">
-    **Framework-specific tutorials**
 
-    Step-by-step integration guides
+  <Card title="Read the Guides" icon="book" href="/guides">
+    Step-by-step integration guides for Cursor, Kilo, Warp & more.
   </Card>
-  <Card title="Explore the API" icon="code" href="/api-reference">
-    **Complete API documentation**
 
-    Interactive examples and SDKs
+  <Card title="Explore Supported Models" icon="code" href="/models">
+    Full list of open-source and routed models.
   </Card>
-  <Card title="Join Our Community" icon="discord" href="https://discord.gg/Pnhfz3UThd">
-    **Get help from our team**
 
-    Active community and support
+  <Card title="Join Our Community" icon="discord" href="/discord">
+    Get help, ask questions, and chat with our team.
   </Card>
 </CardGroup>
