@@ -1,0 +1,216 @@
+---
+title: "Vision Support"
+sidebarTitle: "Vision Support"
+description: "Send images to Emby’s vision-enabled models using URLs or base64-encoded image data."
+---
+
+# Vision Support
+
+Emby supports **vision-enabled models** that can understand, analyze, describe, and transform images.  
+You can send images using **HTTPS URLs** or **inline base64**—fully compatible with the OpenAI Messages format your tools already use.
+
+Vision models such as **Qwen-VL**, **DeepSeek-Vision**, **GLM-VL**, and others are available directly through:
+
+```bash
+GET https://api.emby.dev/v1/models
+```
+
+---
+
+## Vision-Enabled Models
+
+Any model with `"vision": true` in the Emby model list can:
+
+- Analyze images  
+- Describe objects, scenes, and text  
+- Perform comparisons  
+- Extract information (OCR-like)  
+- Modify or process image inputs  
+- Work with mixed text + image messages  
+
+---
+
+## Sending Images to Vision Models
+
+Images can be passed in **two formats**:
+
+<CardGroup cols={2}>
+  <Card title="HTTPS URL" icon="globe">
+    Provide a publicly reachable HTTPS image URL.
+  </Card>
+  <Card title="Base64 Data" icon="file-image">
+    Send an inline base64-encoded image directly in the request body.
+  </Card>
+</CardGroup>
+
+---
+
+## 1. Using HTTPS URLs
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-vision",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          { "type": "text", "text": "What is shown in this image?" },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "https://example.com/dog.jpg"
+            }
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+---
+
+## 2. Using Base64 Inline Data
+
+Perfect when the image is **local**, or cannot be publicly hosted.
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-vision",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          { "type": "text", "text": "Describe this image" },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/png;base64,<your_base64_here>"
+            }
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+---
+
+## Content Format (Mixed Input)
+
+Vision models require `content` to be an **array** when sending images.
+
+Types:
+
+- **Text block:**
+  ```json
+  { "type": "text", "text": "Your question" }
+  ```
+
+- **Image block:**
+  ```json
+  { "type": "image_url", "image_url": { "url": "<url_or_base64>" } }
+  ```
+
+---
+
+## Sending Multiple Images
+
+You can include **any number of images** to compare, combine, or analyze together.
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "glm-vision",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          { "type": "text", "text": "Compare these two photos." },
+          {
+            "type": "image_url",
+            "image_url": { "url": "https://example.com/img1.jpg" }
+          },
+          {
+            "type": "image_url",
+            "image_url": { "url": "https://example.com/img2.jpg" }
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+---
+
+## Simple Text-Only Messages Still Work
+
+If no images are included, you may still send simple string content:
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-vision",
+    "messages": [
+      { "role": "user", "content": "Hello! What models do you support?" }
+    ]
+  }'
+```
+
+---
+
+## Supported Image Types
+
+Vision models typically support:
+
+- **JPEG** (`.jpg`, `.jpeg`)  
+- **PNG** (`.png`)  
+- **WebP** (`.webp`)  
+- **GIF** (`.gif`)  
+
+Most Emby-hosted models also support high-resolution input (up to 20–30MB depending on the model).
+
+---
+
+## Error Handling
+
+If an image fails (wrong format, unreachable URL, base64 error), Emby handles it gracefully:
+
+<CardGroup cols={2}>
+  <Card title="Graceful Fallback" icon="triangle-exclamation">
+    Emby returns a helpful error message instead of crashing your request.
+  </Card>
+  <Card title="Per-model Handling" icon="code">
+    Some models may attempt inference with remaining images if one fails.
+  </Card>
+</CardGroup>
+
+Typical error example:
+
+```json
+{
+  "error": {
+    "message": "Image could not be fetched or decoded",
+    "type": "invalid_image_input"
+  }
+}
+```
+
+---
+
+## Need help testing vision models?
+
+We're here to help:
+
+**WhatsApp us:** https://wa.absolum.nl  
+**Book a call:** https://cal.com/absolum/30min
+

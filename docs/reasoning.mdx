@@ -1,0 +1,229 @@
+---
+title: "Reasoning Models"
+sidebarTitle: "Reasoning"
+description: "Use Emby’s reasoning-capable models to get step-by-step thinking, complex problem solving and transparent logic."
+---
+
+# Reasoning Support
+
+Some Emby models can show their **step-by-step reasoning process** before giving the final answer.  
+This is useful for:
+
+- Debugging & code explanation  
+- Math & symbolic reasoning  
+- Logic puzzles  
+- Complex planning  
+- Multi-step problem solving  
+
+You access reasoning through a single parameter: **`reasoning_effort`**.
+
+---
+
+## Reasoning-Capable Models
+
+You can find all reasoning models on the `/models` endpoint.
+
+These usually include:
+
+- **Kimi 1.5+ (Emby-hosted)**
+- **DeepSeek-R1 & DeepSeek-V3 R1**
+- **Qwen 3.5 Reasoning**
+- **GLM-4 Reasoning series**
+- **OSS Reasoning Models (gpt-oss-20b, 120b, etc.)**
+
+Some models **reason internally but do not show their chain-of-thought**, which is expected behavior.  
+Emby returns only provider-approved reasoning fields.
+
+---
+
+## Reasoning Levels
+
+Add `reasoning_effort` to your request:
+
+| Level     | What it means |
+|----------|----------------|
+| `"minimal"` | Fastest, lightweight reasoning |
+| `"low"` | Good for simple chain-of-thought |
+| `"medium"` | Balanced accuracy + cost (recommended) |
+| `"high"` | Deep reasoning for complex problems |
+
+---
+
+## Example Request
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek-r1",
+    "messages": [
+      { "role": "user", "content": "What is 2/3 + 1/4 + 5/6?" }
+    ],
+    "reasoning_effort": "medium"
+  }'
+```
+
+### Example Response
+
+```json
+{
+  "id": "chatcmpl-abc123",
+  "object": "chat.completion",
+  "model": "deepseek-r1",
+  "choices": [
+    {
+      "message": {
+        "role": "assistant",
+        "content": "The answer is 1.75 or 7/4.",
+        "reasoning": "Find common denominator (12). Convert: 2/3=8/12, 1/4=3/12, 5/6=10/12. Sum: 8+3+10=21/12=7/4."
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 20,
+    "completion_tokens": 45,
+    "reasoning_tokens": 35,
+    "total_tokens": 65
+  }
+}
+```
+
+---
+
+## Streaming Reasoning
+
+When using `"stream": true`, reasoning is streamed **before** the answer.
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek-r1",
+    "messages": [
+      {
+        "role": "user",
+        "content": "If all roses are flowers and some flowers fade quickly, do some roses fade quickly?"
+      }
+    ],
+    "reasoning_effort": "high",
+    "stream": true
+  }'
+```
+
+**Reasoning arrives in chunks**:
+
+```json
+data: {
+  "object": "chat.completion.chunk",
+  "choices": [
+    {
+      "delta": {
+        "reasoning": "Let's analyze the premises..."
+      }
+    }
+  ]
+}
+```
+
+This allows UIs to show “thinking steps” in real time.
+
+---
+
+## Usage Tracking
+
+Every reasoning-enabled call includes:
+
+- `reasoning_tokens`  
+- `completion_tokens`  
+- `prompt_tokens`  
+- `total_tokens`
+
+You can inspect:
+
+- Full reasoning text  
+- Latency  
+- Token costs  
+- Model behavior  
+
+All visible in the Emby dashboard.
+
+---
+
+## Auto-Routing Behavior
+
+When using generic models like `"deepseek-r1"` without specifying version:
+
+Emby will:
+
+- Choose a reasoning-enabled variant  
+- Apply a safe default reasoning level  
+- Only route to providers that support reasoning  
+- Normalize the output format  
+
+This ensures stable behavior even when new reasoning models appear.
+
+---
+
+## Model Differences
+
+Not all models expose reasoning equally:
+
+<CardGroup cols={2}>
+  <Card title="Full reasoning shown" icon="brain">
+    DeepSeek R1, Qwen Reasoning, GLM Reasoning, OSS Reasoners
+  </Card>
+  <Card title="Internal reasoning only" icon="eye-slash">
+    Some vendor models compute reasoning internally but hide chain-of-thought.
+  </Card>
+</CardGroup>
+
+Emby always respects the provider’s rules.
+
+---
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Choose the right effort" icon="gauge">
+    Use low/medium for most tasks.  
+    High can greatly increase token usage.
+  </Card>
+  <Card title="Use streaming for UX" icon="bolt">
+    Let users see the model’s thought process as it unfolds.
+  </Card>
+  <Card title="Inspect logs" icon="list">
+    View full reasoning + token split in the dashboard.
+  </Card>
+  <Card title="Monitor usage" icon="chart-line">
+    Reasoning can multiply token usage—plan accordingly.
+  </Card>
+</CardGroup>
+
+---
+
+## Error Handling
+
+If `reasoning_effort` is used on a model without reasoning support:
+
+```json
+{
+  "error": {
+    "message": "Model does not support reasoning. Remove reasoning_effort or choose a reasoning-capable model.",
+    "type": "invalid_request",
+    "code": "model_not_supported"
+  }
+}
+```
+
+This prevents accidental cost spikes on non-reasoning models.
+
+---
+
+## Need help choosing a reasoning model?
+
+We help teams pick the right models for large codebases & refactoring workflows.
+
+📞 **Book a call:** https://cal.com/absolum/30min  
+💬 **WhatsApp us:** https://wa.absolum.nl

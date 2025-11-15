@@ -1,0 +1,243 @@
+---
+title: "Custom Providers"
+sidebarTitle: "Custom Providers"
+description: "Connect your own OpenAI-compatible backends to Emby — self-hosted, vendor APIs, or internal gateways — all behind one unified endpoint."
+---
+
+# Custom Providers
+
+Emby lets you plug in **any OpenAI-compatible provider** behind the same `/v1` endpoint.
+
+Use this when you want to:
+
+- Connect a **self-hosted model** (vLLM, SGLang, LM Studio, Ollama, etc.)
+- Route to a **third-party gateway** or vendor that speaks OpenAI format
+- Expose an **internal company LLM** behind Emby’s routing, logging, and controls
+- Test **new providers** without changing your app code
+
+All you need is:
+
+- A **name** for the provider  
+- A **base URL**  
+- An **API key / token**
+
+---
+
+## How Custom Providers Work
+
+Once configured, you call models using:
+
+```text
+<provider-name>/<model-id>
+```
+
+For example:
+
+- `mycompany/gpt-4.1-mini`
+- `lab/deepseek-r1`
+- `internal/qwen-3.5-coder`
+
+Emby will:
+
+- Forward the request to your custom provider  
+- Keep the **OpenAI-style request/response** shape  
+- Apply **the same usage logging & observability** as built-in models  
+
+---
+
+## Quick Setup
+
+### 1. Add a Custom Provider in the Dashboard
+
+<Steps>
+  <Step title="Open Providers in Emby">
+    Go to your Emby dashboard → **Settings → Providers**.
+  </Step>
+
+  <Step title="Create Custom Provider">
+    Add a new **Custom Provider** with:
+
+    - **Name** – lowercase name, e.g. <code>mycompany</code> or <code>internal</code>  
+    - **Base URL** – your provider’s API root, e.g. <code>https://api.mycompany.ai</code>  
+    - **API Key / Token** – the key Emby should use when calling your provider
+  </Step>
+
+  <Step title="Save & Test">
+    Save the provider, then use the **“Test connection”** button (if available) or send a small request from your app to confirm everything works.
+  </Step>
+</Steps>
+
+---
+
+## 2. Call Your Custom Provider
+
+Once the provider is created, you can call it like any other model.
+
+### cURL Example
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mycompany/custom-gpt-4",
+    "messages": [
+      { "role": "user", "content": "Hello from my custom provider!" }
+    ]
+  }'
+```
+
+Emby takes care of:
+
+- Setting `Authorization: Bearer <your-custom-provider-key>` when calling your backend  
+- Forwarding the OpenAI-style payload to `https://api.mycompany.ai/v1/chat/completions`  
+- Normalizing the response back to the Emby/OpenAI format
+
+No changes needed in your application besides the **`model`** value.
+
+---
+
+## Configuration Requirements
+
+<CardGroup cols={2}>
+  <Card title="Provider Name" icon="font">
+    - Lowercase letters only: <code>a-z</code>  
+    - Examples: <code>mycompany</code>, <code>internal</code>, <code>lab</code>  
+    - Invalid: <code>MyCompany</code>, <code>my-company</code>, <code>my_company</code>, <code>123test</code>  
+    <br />
+    Must match: <code>/^[a-z]+$/</code>
+  </Card>
+
+  <Card title="Base URL" icon="globe">
+    - Must be a valid <b>HTTPS</b> URL  
+    - Should point to the root of your OpenAI-compatible API  
+    - Emby will append <code>/v1/chat/completions</code> automatically if needed  
+    - Example: <code>https://api.mycompany.ai</code>
+  </Card>
+
+  <Card title="API Token" icon="key">
+    - Provider-specific API key or token  
+    - Sent as <code>Authorization: Bearer &lt;token&gt;</code>  
+    - Stored securely on Emby’s side
+  </Card>
+
+  <Card title="OpenAI Compatibility" icon="code-branch">
+    Your provider must support the OpenAI-style
+    <code>/v1/chat/completions</code> format (or equivalent),
+    including <code>model</code>, <code>messages</code>, and optional
+    parameters like <code>temperature</code>, <code>max_tokens</code>, etc.
+  </Card>
+</CardGroup>
+
+---
+
+## Example: Self-Hosted vLLM / SGLang
+
+If you're running a local or cloud vLLM/SGLang server exposed at:
+
+```text
+https://llm.mycompany.ai
+```
+
+Configure Emby custom provider:
+
+- **Name**: `mycompany`  
+- **Base URL**: `https://llm.mycompany.ai`  
+- **API Key**: (optional, if your gateway uses keys)
+
+Then call it like:
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mycompany/qwen-3.5-coder",
+    "messages": [
+      { "role": "user", "content": "Refactor this function for clarity." }
+    ]
+  }'
+```
+
+---
+
+## What Features You Get via Emby
+
+Custom providers still benefit from:
+
+<CardGroup cols={2}>
+  <Card title="Unified Endpoint" icon="shuffle">
+    One base URL for everything:  
+    <code>https://api.emby.dev/v1</code>  
+    Works for Emby-hosted and custom providers.
+  </Card>
+
+  <Card title="Centralized Auth" icon="lock">
+    Your apps only store <b>one</b> key:  
+    <code>$EMBY_API_KEY</code>.  
+    Per-provider secrets live inside Emby.
+  </Card>
+
+  <Card title="Logging & Analytics" icon="chart-column">
+    See usage, latency, error rates, and model mix for custom providers right in the Emby dashboard.
+  </Card>
+
+  <Card title="Routing Rules" icon="route">
+    Combine Emby-hosted models with your custom ones in the same project, or gradually shift traffic as you evaluate performance.
+  </Card>
+</CardGroup>
+
+---
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Name things clearly" icon="tag">
+    Use names like <code>lab</code>, <code>staging</code>, or <code>prod</code> so it’s obvious which backend a model uses.
+  </Card>
+  <Card title="Keep models discoverable" icon="list">
+    Mirror the provider’s own model IDs:  
+    <code>mycompany/deepseek-r1</code>, <code>mycompany/qwen-32b</code>, etc.
+  </Card>
+  <Card title="Monitor latency & errors" icon="gauge">
+    Custom providers might sit on slower networks or less-optimized hardware. Watch their metrics and adjust accordingly.
+  </Card>
+  <Card title="Compliance & data flow" icon="shield">
+    Emby shows you where requests go. For custom providers, <b>you</b> control location, logs, and retention policies.
+  </Card>
+</CardGroup>
+
+---
+
+## Troubleshooting
+
+**❓ Calls to my custom provider fail**
+
+- Check that the **base URL is HTTPS** and reachable from the internet (or your Emby region)
+- Verify that the provider supports the **OpenAI chat completions format**
+- Confirm the **API key** is valid and not expired
+- Try a direct request to your provider outside Emby to confirm behavior
+
+```bash
+curl -X POST "https://api.mycompany.ai/v1/chat/completions" \
+  -H "Authorization: Bearer $MYCOMPANY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "custom-gpt-4",
+    "messages": [
+      { "role": "user", "content": "Test from direct call" }
+    ]
+  }'
+```
+
+If that fails, fix your provider first.  
+If that works but Emby fails, check your **Custom Provider** settings in the dashboard.
+
+---
+
+## Need Help Wiring Up a Custom Provider?
+
+If you're connecting a private gateway, on-prem model, or custom EU deployment and want to get it right:
+
+📞 **Book a call:** https://cal.com/absolum/30min  
+💬 **WhatsApp us:** https://wa.absolum.nl

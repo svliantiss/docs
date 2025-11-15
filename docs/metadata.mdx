@@ -1,0 +1,145 @@
+---
+title: "Metadata"
+sidebarTitle: "Metadata"
+description: "Attach custom metadata to Emby requests using lightweight headers — ideal for analytics, monitoring, tenant tracking, and debugging."
+---
+
+# Metadata
+
+Emby supports attaching **custom metadata** to your requests using simple HTTP headers.  
+This lets you send contextual information such as:
+
+- Tenant IDs  
+- User/session identifiers  
+- Application versions  
+- Feature flags  
+- Country / region metadata  
+- AB-test buckets  
+- Internal trace IDs  
+
+This metadata will appear in your Emby request logs and analytics, giving you fine-grained insights across users, apps, tenants, or features.
+
+Future updates will allow **segmented cost & latency analytics** based on this metadata (e.g., per user, per region, per feature).
+
+---
+
+## Using Custom Metadata Headers
+
+To add metadata, include any header beginning with:
+
+```
+X-Emby-
+```
+
+Example:
+
+```bash
+curl -X POST https://api.emby.dev/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "X-Emby-Country: US" \
+  -H "X-Emby-User-ID: 9403f741-a524-4b18-b1b2-dbb71cdff2a4" \
+  -d '{
+    "model": "emby/deepseek-v3",
+    "messages": [
+      { "role": "user", "content": "Hello, how are you?" }
+    ]
+  }'
+```
+
+All metadata headers will be visible inside:
+
+- Emby → Logs  
+- Emby → Usage Analytics  
+- Per-request inspector  
+
+---
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use the `X-Emby-` prefix" icon="tag">
+    All metadata headers should start with  
+    <code>X-Emby-</code>  
+    Example: <code>X-Emby-Tenant-ID</code>.
+  </Card>
+
+  <Card title="Consistent naming" icon="align-left">
+    Use short, descriptive names separated with hyphens:  
+    <code>X-Emby-App-Version</code>,  
+    <code>X-Emby-Feature</code>.
+  </Card>
+
+  <Card title="Avoid sensitive data" icon="shield">
+    Do not include raw PII like email addresses.  
+    Use hashed or anonymized IDs instead.
+  </Card>
+
+  <Card title="Keep values small" icon="scale-balanced">
+    Keep metadata concise to avoid bloated requests, especially for high-volume applications.
+  </Card>
+</CardGroup>
+
+---
+
+## Example: Multi-Tenant Platform
+
+Here’s a real-world example for SaaS platforms running multiple tenants:
+
+```bash
+curl -X POST https://api.emby.dev/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "X-Emby-Tenant-ID: acme-corp" \
+  -H "X-Emby-User-ID: user-12345" \
+  -H "X-Emby-App-Version: 2.1.4" \
+  -H "X-Emby-Feature: chat-assistant" \
+  -d '{
+    "model": "emby/qwen-3.5-coder",
+    "messages": [
+      { "role": "user", "content": "Summarize this document..." }
+    ]
+  }'
+```
+
+This allows Emby to break down analytics by:
+
+- Tenant  
+- User  
+- App version  
+- Feature or product area  
+
+Perfect for understanding usage, cost distribution, performance hotspots, and debugging.
+
+---
+
+## What Metadata Enables
+
+<CardGroup cols={2}>
+  <Card title="Per-Tenant Monitoring" icon="building">
+    Track latency, errors, and usage across different customers.
+  </Card>
+  <Card title="Session & Debug Tracing" icon="bug">
+    Pass trace IDs to connect LLM calls to backend logs.
+  </Card>
+  <Card title="Feature Analytics" icon="chart-line">
+    See which features or tools drive the most LLM usage.
+  </Card>
+  <Card title="Cost Breakdown" icon="dollar-sign">
+    Attribute spend per tenant, user, region, or version.
+  </Card>
+</CardGroup>
+
+---
+
+## Need Help Designing Metadata Strategy?
+
+If you want help designing:  
+- Tenant-aware billing  
+- Usage attribution  
+- AB-test instrumentation  
+- Observability correlation  
+- Multi-region tracking  
+
+📞 **Book a call:** https://cal.com/absolum/30min  
+💬 **WhatsApp us:** https://wa.absolum.nl  

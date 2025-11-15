@@ -1,0 +1,133 @@
+---
+title: "Source Attribution"
+sidebarTitle: "Source Attribution"
+description: "Use the X-Source header to identify your domain when sending requests to Emby — for optional, privacy-safe public usage statistics."
+---
+
+# Source Attribution
+
+Emby supports an optional **X-Source** header that lets you identify your application or domain when making requests. This enables transparent, privacy-safe public usage statistics that help the ecosystem understand how Emby is being used.
+
+No content, user data, or sensitive information is ever shared — only anonymized, aggregated counts.
+
+---
+
+## X-Source Header
+
+Add the header to any request:
+
+```bash
+curl -X POST https://api.emby.dev/v1/chat/completions \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "X-Source: example.com" \
+  -d '{
+    "model": "deepseek-v3",
+    "messages": [
+      {"role": "user", "content": "Hello, how are you?"}
+    ]
+  }'
+```
+
+---
+
+## Accepted Formats
+
+You can pass your domain in any of the following ways — Emby will normalize them automatically:
+
+- `example.com`
+- `https://example.com`
+- `https://www.example.com`
+- `www.example.com`
+
+All forms are converted to the base domain (`example.com`) for aggregation.
+
+---
+
+## What We Publish (Public Stats)
+
+Aggregated, privacy-safe stats help the Emby community understand adoption and model usage across the ecosystem.
+
+<CardGroup cols={2}>
+  <Card title="Popular Domains" icon="globe">
+    See which applications and tools are building on Emby.
+  </Card>
+  <Card title="Model Usage Trends" icon="chart-line">
+    Understand which models developers prefer over time.
+  </Card>
+  <Card title="Regional Adoption" icon="location-dot">
+    High-level (country-level) geographic distribution.
+  </Card>
+  <Card title="Growth Metrics" icon="arrow-trend-up">
+    Track ecosystem expansion across industries and communities.
+  </Card>
+</CardGroup>
+
+---
+
+## Privacy Considerations
+
+Emby is built for EU-first teams, with strict privacy controls.  
+Here is exactly what is and isn’t collected.
+
+### ✅ What’s Public
+
+Only anonymized, aggregated data:
+
+- Base domain (e.g. `example.com`)
+- Request counts
+- Model usage totals
+- Country-level geolocation
+
+### ❌ What’s Private
+
+Never collected, logged, or shared:
+
+- Request bodies or content  
+- User identifiers  
+- Code, prompts, or responses  
+- Personal data of any kind  
+- API keys or tokens  
+- Detailed behavioral patterns
+
+Your data never leaves the EU unless you explicitly route to a non-EU provider.
+
+---
+
+## Why Use X-Source?
+
+Using the X-Source header is optional but recommended — it helps the community and benefits your project.
+
+<CardGroup cols={2}>
+  <Card title="Showcase Your Project" icon="star">
+    Your domain appears in public usage stats, highlighting your work.
+  </Card>
+  <Card title="Build Credibility" icon="certificate">
+    Demonstrate real-world adoption to users or customers.
+  </Card>
+  <Card title="Support Transparency" icon="eye">
+    Help the open-source ecosystem understand model adoption.
+  </Card>
+  <Card title="Inspire Developers" icon="users">
+    Others can discover your app and learn from your implementation.
+  </Card>
+</CardGroup>
+
+---
+
+## Optional — But Encouraged
+
+Adding the header:
+
+- Supports an open and transparent AI ecosystem  
+- Helps track community growth  
+- Makes it clear which tools are succeeding  
+- Requires **zero additional configuration**  
+
+Your participation contributes to a healthier, more collaborative AI infrastructure ecosystem.
+
+---
+
+Need help?  
+Chat with us on **WhatsApp**: https://wa.absolum.nl  
+Or **book a call**: https://cal.com/absolum/30min

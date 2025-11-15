@@ -1,0 +1,210 @@
+---
+title: "Image Generation"
+sidebarTitle: "Image Generation"
+description: "Generate images with Emby using the standard chat completions API — fully OpenAI-compatible."
+---
+
+# Image Generation
+
+Emby supports image-generation models through the same **OpenAI-compatible `/v1/chat/completions` API** you already use for text.  
+If your app already supports OpenAI image responses, it works with Emby automatically.
+
+Generated images are returned as **base64-encoded data URLs** inside the assistant response.
+
+---
+
+## Available Models
+
+You can view all image-generation capable models directly from:
+
+```bash
+GET https://api.emby.dev/v1/models
+```
+
+Models such as **qwen2.5-vl**, **glm-vision**, **deepseek-vision**, and others support both generation and vision editing workflows.
+
+---
+
+## Generate an Image
+
+Image generation works exactly like a normal chat request — just choose a vision-enabled or image-generating model.
+
+```bash
+curl -X POST "https://api.emby.dev/v1/chat/completions" \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-vision",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Generate an image of a golden retriever puppy playing in a sunny meadow"
+      }
+    ]
+  }'
+```
+
+---
+
+## Response Format
+
+Emby returns image results using the standard OpenAI-style structure:
+
+```json
+{
+  "id": "chatcmpl-123",
+  "object": "chat.completion",
+  "created": 1730000000,
+  "model": "qwen2.5-vision",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Here is your generated image:",
+        "images": [
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/png;base64,<base64data>"
+            }
+          }
+        ]
+      },
+      "finish_reason": "stop"
+    }
+  ]
+}
+```
+
+The important part is the `images` array:
+
+**Image Item Structure**
+
+- `type`: always `"image_url"`
+- `image_url.url`: base64-encoded `data:image/...` URL  
+
+---
+
+## Vision Support (Editing & Modifying Images)
+
+You can send an image **to the model** for editing, analysis, or transformation.  
+Simply include a `type: "image_url"` or `type: "file"` object inside the messages.
+
+Example:
+
+```json
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "image_url",
+      "image_url": { "url": "data:image/png;base64,<your_image>" }
+    },
+    {
+      "type": "text",
+      "text": "Remove the background and convert this to a 3D style."
+    }
+  ]
+}
+```
+
+Emby vision models can:
+
+- Edit images  
+- Describe images  
+- Extract text  
+- Generate variations  
+- Combine text + image tasks  
+
+---
+
+## Using the Emby AI SDK (Full Example)
+
+Below is a clean, ready-to-copy example using the Emby AI SDK provider.
+
+### `/api/chat/route.ts`
+
+```ts
+import { streamText, convertToModelMessages } from "ai";
+import { createEmby } from "@emby/ai-sdk-provider";
+
+export async function POST(req: Request) {
+  const body = await req.json();
+  const emby = createEmby({
+    apiKey: process.env.EMBY_API_KEY!,
+    baseUrl: "https://api.emby.dev/v1"
+  });
+
+  try {
+    return streamText({
+      model: emby.chat("qwen2.5-vision"),
+      messages: convertToModelMessages(body.messages)
+    }).toUIMessageStreamResponse();
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "Emby request failed" }),
+      { status: 500 }
+    );
+  }
+}
+```
+
+---
+
+## Rendering in Your Frontend
+
+Below is a minimal, Emby-cleaned version of image rendering logic:
+
+```ts
+import { extractBase64FromDataUrl } from "@/lib/image-utils";
+
+export const ImageMessage = ({ image }) => {
+  const base64 = extractBase64FromDataUrl(image.url);
+  return (
+    <img
+      src={image.url}
+      alt="Generated"
+      className="rounded-lg shadow-md"
+    />
+  );
+};
+```
+
+---
+
+## Image Utils (Compatible With Emby)
+
+```ts
+export function extractBase64FromDataUrl(dataUrl: string) {
+  if (!dataUrl.startsWith("data:")) return "";
+  return dataUrl.substring(dataUrl.indexOf(",") + 1);
+}
+```
+
+---
+
+## Usage Notes
+
+<CardGroup cols={2}>
+  <Card title="Larger Payloads" icon="file-image">
+    Image responses are base64-encoded, so response sizes can be large.
+  </Card>
+  <Card title="Higher Compute Cost" icon="gauge">
+    Image models typically use more compute than text-only models.
+  </Card>
+  <Card title="Streaming Support" icon="bolt">
+    Emby can stream text; image parts arrive once the model finishes synthesis.
+  </Card>
+  <Card title="EU Hosting" icon="shield">
+    All Emby-hosted vision models run inside EU data centers (bit.nl + Nebius AMS).
+  </Card>
+</CardGroup>
+
+---
+
+Need help integrating image generation?
+
+**WhatsApp us:** https://wa.absolum.nl  
+**Book a call:** https://cal.com/absolum/30min
+

@@ -1,0 +1,192 @@
+---
+title: "Quickstart"
+sidebarTitle: "Quickstart"
+description: "The fastest way to start using Emby in any language or framework."
+---
+
+# 🚀 Quickstart
+
+Welcome to **Emby** — the unified AI gateway that gives developers **fast, predictable, EU-hosted access to the best open-source and provider models**, all through fully **OpenAI- and Anthropic-compatible APIs**.
+
+No lock-in. No complex setup.  
+Just swap your API key + base URL and keep your existing workflow.
+
+> **TL;DR:**  
+> Point your requests to  
+> `https://api.emby.dev/v1/...`  
+> and use your `EMBY_API_KEY`.
+
+---
+
+# 1 · Get Your API Key
+
+Create your Emby account → copy your key → set it in your environment.
+
+```bash
+export EMBY_API_KEY="emby_XXXXXXXXXXXXXXXX"
+export OPENAI_API_KEY="$EMBY_API_KEY"         # optional alias
+export OPENAI_API_BASE="https://api.emby.dev/v1"
+```
+
+Your tools (Cursor, Claude Code, Kilo, Warp, n8n, Aider, etc.) now work out of the box.
+
+---
+
+# 2 · Pick Your Language
+
+Below are simple examples using Emby’s **OpenAI-compatible** `/chat/completions` endpoint.
+
+## curl
+
+```bash
+curl -X POST https://api.emby.dev/v1/chat/completions \
+  -H "Authorization: Bearer $EMBY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek-v3",
+    "messages": [
+      {"role": "user", "content": "Hello, how are you?"}
+    ]
+  }'
+```
+
+---
+
+# 3 · SDK Integrations
+
+Emby works with any OpenAI-style client.
+
+## **ai-sdk (Vercel AI SDK)**
+
+```ts
+import { openai } from "@ai-sdk/openai";
+
+const client = openai({
+  apiKey: process.env.EMBY_API_KEY!,
+  baseURL: "https://api.emby.dev/v1",
+});
+
+const { text } = await client.generateText({
+  model: "deepseek-v3",
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
+});
+
+console.log(text);
+```
+
+---
+
+## **OpenAI SDK (official)**
+
+```ts
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.EMBY_API_KEY,
+  baseURL: "https://api.emby.dev/v1",
+});
+
+const completion = await client.chat.completions.create({
+  model: "deepseek-v3",
+  messages: [{ role: "user", content: "Hello!" }],
+});
+
+console.log(completion.choices[0].message);
+```
+
+---
+
+## **Vercel AI SDK (low-level)**
+
+```ts
+import { createOpenAI } from "@ai-sdk/openai";
+
+const emby = createOpenAI({
+  apiKey: process.env.EMBY_API_KEY!,
+  baseURL: "https://api.emby.dev/v1",
+});
+
+const result = await emby.chat({
+  model: "kimi-k2-thinking",
+  messages: [{ role: "user", content: "Explain WebAssembly in simple terms." }],
+});
+
+console.log(result.choices[0].message.content);
+```
+
+---
+
+# 4 · Going Further
+
+<CardGroup cols={2}>
+  <Card title="Streaming" icon="bolt">
+    Add <b>stream: true</b> to get event-streamed responses.
+  </Card>
+  <Card title="Telemetry & Usage" icon="chart-line">
+    Every request appears in your dashboard with latency + cost.
+  </Card>
+  <Card title="Unified Routing" icon="arrows-left-right">
+    Route to Emby models, Azure, Bedrock, DeepInfra or BYOK providers.
+  </Card>
+  <Card title="Claude-Style API" icon="code">
+    Use Emby’s <b>/v1/messages</b> endpoint to run any model via Anthropic format.
+  </Card>
+</CardGroup>
+
+---
+
+# 5 · FAQ
+
+<AccordionGroup>
+  <Accordion title="Do my existing OpenAI tools keep working?" icon="check">
+    Yes — Emby is fully OpenAI API compatible.
+  </Accordion>
+
+  <Accordion title="Do you support Claude Code?" icon="terminal">
+    Yes — through the native <b>Anthropic-compatible</b> /v1/messages endpoint.
+  </Accordion>
+
+  <Accordion title="Are you EU-hosted and compliant?" icon="shield">
+    Yes — Emby runs on ISO27001 + NEN7510 certified infrastructure inside the EU (bit.nl & Nebius Amsterdam).
+  </Accordion>
+
+  <Accordion title="Is pricing predictable?" icon="tag">
+    Yes — flat monthly per developer, no surprise token bills.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+# 6 · Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Migration Guides" icon="arrow-right" href="/migrate">
+    Move from OpenAI, Anthropic, Gemini, OpenRouter & more in minutes.
+  </Card>
+  <Card title="Claude Compatibility" icon="terminal" href="/anthropic">
+    Use any Emby model via the Claude API schema.
+  </Card>
+  <Card title="Model Catalog" icon="model" href="/models">
+    View all Emby-hosted & routed models.
+  </Card>
+  <Card title="SDK Reference" icon="book" href="/api-reference">
+    All endpoints, parameters, and examples.
+  </Card>
+</CardGroup>
+
+---
+
+# Need Help?
+
+<CardGroup cols={2}>
+  <Card title="WhatsApp Support" icon="phone">
+    Chat with us instantly:  
+    <a href="https://wa.absolum.nl" target="_blank">https://wa.absolum.nl</a>
+  </Card>
+  <Card title="Book a Call" icon="calendar">
+    For enterprise routing, custom GPU servers, or help migrating:  
+    <a href="https://cal.com/absolum/30min" target="_blank">https://cal.com/absolum/30min</a>
+  </Card>
+</CardGroup>
+
+Happy building with Emby! ✨
