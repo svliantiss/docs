@@ -1,17 +1,16 @@
 ---
 title: "Migrate to Emby"
 sidebarTitle: "Migrate to Emby"
-description: "Move from your existing AI provider to Emby in minutes — no lock-in, no complexity, and fully compatible with your current tools."
+description: "Move from your existing AI provider to Emby in minutes no lock-in, no complexity, and fully compatible with your current tools."
 ---
 
 ## Migrate to Emby in Minutes
 
 Switching from platforms like OpenAI, Anthropic, Gemini, OpenRouter, Together, or your own OpenAI-compatible backend?  
-Emby makes migration simple — **no code rewrites**, **no lock-in**, and **instant compatibility** with your existing tools like Cursor, Claude Code, Kilo Code, Warp, Aider, and OpenWebUI.
+
+Emby makes migration simple **no code rewrites**, **no lock-in**, and **instant compatibility** with your existing tools like Cursor, Claude Code, Kilo Code, Warp, Aider, and OpenWebUI.
 
 Emby is fully **OpenAI & Anthropic compatible**, so most users only need to **swap their API key and base URL**.
-
----
 
 ## Quick Migration (Most Users)
 
@@ -22,14 +21,14 @@ OPENAI_API_KEY=<your-emby-key>
 OPENAI_API_BASE=https://api.emby.dev/v1
 ```
 
-You're done.  
+You're done.\
 Your tools continue to work — but now with predictable pricing, EU hosting, and fast GPU-backed open-source models.
 
 ---
 
 # Tool-Specific Migration Guides
 
-Below are the most common tools developers switch to Emby from.  
+Below are the most common tools developers switch to Emby from.\
 Everything stays compatible using the same OpenAI-style configuration.
 
 ---
@@ -38,12 +37,22 @@ Everything stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate Cursor to Emby" icon="cursor">
-    1. Open <b>Settings → Providers</b><br/>
-    2. Select <b>OpenAI Compatible</b><br/>
-    3. Enter:<br/><br/>
-    <code>Base URL: https://api.emby.dev/v1</code><br/>
-    <code>API Key: &lt;your-emby-key&gt;</code><br/><br/>
-    Cursor now uses Emby with no additional changes.
+    1. Open <b>
+       Settings → Providers</b>
+    2. Select <b>
+       OpenAI Compatible</b>
+    3. Enter:\
+       \
+        <code>
+       Base URL: https://api.emby.dev/v1</code>
+
+       \
+        <code>
+       API Key: \<your-emby-key\></code>
+
+       \
+       \
+        Cursor now uses Emby with no additional changes.
   </Card>
 </CardGroup>
 
@@ -53,16 +62,26 @@ Everything stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate Claude Code to Emby" icon="code">
-    Claude Code works perfectly with any OpenAI-compatible API.<br/><br/>
+    Claude Code works perfectly with any OpenAI-compatible API.
 
-    Set the environment variables:<br/><br/>
+    Set the environment variables:
 
-    <code>export ANTHROPIC_BASE_URL=https://api.emby.dev/v1</code><br/>
-    <code>export ANTHROPIC_AUTH_TOKEN=&lt;your-emby-key&gt;</code><br/>
-    <code>export ANTHROPIC_MODEL=deepseek-v3</code> (or any Emby model)<br/><br/>
+    <code>
+    export ANTHROPIC_BASE_URL=https://api.emby.dev/v1</code>
 
-    Then run:<br/>
-    <code>claude</code><br/><br/>
+    \
+     <code>
+    export ANTHROPIC_AUTH_TOKEN=\<your-emby-key\></code>
+
+    \
+     <code>
+    export ANTHROPIC_MODEL=deepseek-v3</code>
+
+     (or any Emby model)
+
+    Then run:\
+     <code>
+    claude</code>
 
     Claude Code will now route through Emby and can use any Emby-hosted model.
   </Card>
@@ -74,12 +93,23 @@ Everything stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate Kilo Code" icon="code">
-    1. Install Kilo Code from VSCode Marketplace<br/>
-    2. Open Kilo Settings and configure:<br/><br/>
-    <code>API Provider: OpenAI Compatible</code><br/>
-    <code>Base URL: https://api.emby.dev/v1</code><br/>
-    <code>API Key: &lt;your-emby-key&gt;</code><br/><br/>
-    Your coding assistant now runs on fast, stable EU-hosted Emby models.
+    1. Install Kilo Code from VSCode Marketplace
+    2. Open Kilo Settings and configure:\
+       \
+        <code>
+       API Provider: OpenAI Compatible</code>
+
+       \
+        <code>
+       Base URL: https://api.emby.dev/v1</code>
+
+       \
+        <code>
+       API Key: \<your-emby-key\></code>
+
+       \
+       \
+        Your coding assistant now runs on fast, stable EU-hosted Emby models.
   </Card>
 </CardGroup>
 
@@ -89,12 +119,21 @@ Everything stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate OpenWebUI" icon="browser">
-    1. Install & open OpenWebUI<br/>
-    2. Go to <b>Admin Panel → Settings → Connections</b><br/><br/>
-    <code>OPENAI_API_BASE=https://api.emby.dev/v1</code><br/>
-    <code>OPENAI_API_KEY=&lt;your-emby-key&gt;</code><br/><br/>
-    3. Select any Emby model.<br/><br/>
-    You're fully migrated.
+    1. Install & open OpenWebUI
+    2. Go to <b>
+       Admin Panel → Settings → Connections</b>
+
+       \
+       \
+        <code>
+       OPENAI_API_BASE=https://api.emby.dev/v1</code>
+
+       \
+        <code>
+       OPENAI_API_KEY=\<your-emby-key\></code>
+    3. Select any Emby model.\
+       \
+        You're fully migrated.
   </Card>
 </CardGroup>
 
@@ -104,13 +143,22 @@ Everything stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate Aider" icon="terminal">
-    1. Install Aider<br/>
-    2. Set:<br/><br/>
-    <code>OPENAI_API_BASE=https://api.emby.dev/v1</code><br/>
-    <code>OPENAI_API_KEY=&lt;your-emby-key&gt;</code><br/><br/>
-    3. Use any Emby model:<br/>
-    <code>aider --model deepseek-v3</code><br/><br/>
-    Aider now runs entirely through Emby.
+    1. Install Aider
+    2. Set:\
+       \
+        <code>
+       OPENAI_API_BASE=https://api.emby.dev/v1</code>
+
+       \
+        <code>
+       OPENAI_API_KEY=\<your-emby-key\></code>
+    3. Use any Emby model:\
+        <code>
+       aider --model deepseek-v3</code>
+
+       \
+       \
+        Aider now runs entirely through Emby.
   </Card>
 </CardGroup>
 
@@ -120,14 +168,27 @@ Everything stays compatible using the same OpenAI-style configuration.
 
 <CardGroup cols={1}>
   <Card title="How to Migrate n8n → Emby" icon="workflow">
-    1. Go to <b>Settings → Credentials</b><br/>
-    2. Choose <b>OpenAI</b> and enter:<br/><br/>
-    <code>API Key: &lt;your-emby-key&gt;</code><br/>
-    <code>Base URL: https://api.emby.dev/v1</code><br/>
-    <code>Organization: (leave empty)</code><br/><br/>
-    3. Add an AI Agent + Chat Model in your workflow<br/><br/>
-    4. Pick any Emby model<br/><br/>
-    You're ready to go.
+    1. Go to <b>
+       Settings → Credentials</b>
+    2. Choose <b>
+       OpenAI</b>
+
+        and enter:\
+       \
+        <code>
+       API Key: \<your-emby-key\></code>
+
+       \
+        <code>
+       Base URL: https://api.emby.dev/v1</code>
+
+       \
+        <code>
+       Organization: (leave empty)</code>
+    3. Add an AI Agent + Chat Model in your workflow
+    4. Pick any Emby model\
+       \
+        You're ready to go.
   </Card>
 </CardGroup>
 
@@ -158,16 +219,30 @@ We’re here to make switching simple — especially for full engineering teams.
 
 <CardGroup cols={2}>
   <Card title="WhatsApp Support" icon="phone">
-    Message us anytime:<br/>
-    <a href="https://wa.absolum.nl" target="_blank">https://wa.absolum.nl</a><br/><br/>
-    Fast help for setup, debugging, or migration steps.
-  </Card>
+    Message us anytime:\
+     <a href="https://wa.absolum.nl" target="_blank">
+    https://wa.absolum.nl</a>
 
+    \
+    \
+     Fast help for setup, debugging, or migration steps.
+  </Card>
   <Card title="Book a Call" icon="calendar">
-    Need a <b>custom GPU server</b>, <b>enterprise routing setup</b>,  
-    or <b>large-team onboarding</b>?<br/><br/>
-    Schedule a 30-minute meeting:<br/>
-    <a href="https://cal.com/absolum/30min" target="_blank">https://cal.com/absolum/30min</a>
+    Need a <b>
+    custom GPU server</b>
+
+    , <b>
+    enterprise routing setup</b>
+
+    ,\
+    or <b>
+    large-team onboarding</b>
+
+    ?\
+    \
+     Schedule a 30-minute meeting:\
+     <a href="https://cal.com/absolum/30min" target="_blank">
+    https://cal.com/absolum/30min</a>
   </Card>
 </CardGroup>
 
