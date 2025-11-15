@@ -4,8 +4,8 @@
   "appearance": {
     "default": "system"
   },
-  "name": "Emby Dev",
-  "description": "With 2 lines of code supercharge your engineering team with unlimited Open Source AI, predictable pricing, and enterprise-grade model routing.",
+  "name": "Emby Dev - Unlimited AI for Developers",
+  "description": "Supercharge your engineering team with unlimited Open Source AI, predictable pricing, and enterprise-grade model routing.",
   "colors": {
     "primary": "#000",
     "light": "#fff",
@@ -32,7 +32,17 @@
             "group": "Bootup",
             "pages": [
               "introduction",
-              "migrate"
+              "migrate", 
+              "quickstart",
+              "models",
+              "custom-providers", 
+              "anthropic-api",
+              "support",
+              "image-generation",
+              "vision-support",
+              "reasoning",
+              "source-attribution",
+              "metadata"
             ]
           },
           {
